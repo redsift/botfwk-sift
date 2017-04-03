@@ -25,17 +25,21 @@
       "webhooks": {},
       "botfwk":{
         "all": {
-          "filter": {
-            "conditions": [
+          "filter" : {
+            "conditions" : [
               {
-                "text": {
-                  "regexp": {
-                    "pattern": ".*",
-                    "flags": "i"
+                "type" : "message:direct_mention,direct_message,mention"
+              },
+              {
+                "text" : {
+                  "regexp" : {
+                    "flags" : "i",
+                    "pattern" : "match.*"
                   }
                 }
               }
-            ]
+            ],
+            "operator" : "AND"
           }
         },
         "actions": {
