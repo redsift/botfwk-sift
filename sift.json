@@ -1,0 +1,75 @@
+{
+  "name": "botfwk-sift",
+  "display-name": "Botfwk Demo Sift",
+  "description": "",
+  "author": "",
+  "version": "1.0.0",
+  "icon": "assets/blueprint.svg",
+  "interfaces": {
+    "email": {
+      "thread" : {
+        "controller": "dist/js/controller.umd-es2015.min.js"
+      },
+      "client" : {
+        "controller": "dist/js/email-client-controller.umd-es2015.min.js"
+      }
+    },
+    "summary": {
+      "controller": "dist/js/controller.umd-es2015.min.js"
+    }
+  },
+  "dag": {
+    "inputs":{
+      "emails": {},
+      "slack-bot": {},
+      "webhooks": {},
+      "botfwk":{
+        "all": {
+          "filter": {
+            "conditions": [
+              {
+                "type": "message:direct_mention,direct_message"
+              },
+              {
+                "text": {
+                  "regexp": {
+                    "pattern": ".*",
+                    "flags": "i"
+                  }
+                }
+              }
+            ],
+            "operator": "AND"
+          }
+        },
+        "actions": {
+          "filter": {
+            "conditions": [
+              {
+                "actions": {}
+              }
+            ]
+          }
+        }
+      }
+    },
+    "nodes":[{
+      "#": "First Node",
+      "implementation": {
+        "javascript": "server/node1.js",
+        "when":{
+          "interval": 900
+        }
+      },
+      "outputs": {
+        "output1": {}
+      }
+    }],
+    "stores":{
+      "output1" : {
+        "key$schema":"string"
+      }
+    },
+    "outputs":{}
+  }
+}
