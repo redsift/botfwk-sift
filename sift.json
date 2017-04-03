@@ -28,9 +28,6 @@
           "filter": {
             "conditions": [
               {
-                "type": "message:direct_mention,direct_message"
-              },
-              {
                 "text": {
                   "regexp": {
                     "pattern": ".*",
@@ -38,8 +35,7 @@
                   }
                 }
               }
-            ],
-            "operator": "AND"
+            ]
           }
         },
         "actions": {
