@@ -33,7 +33,7 @@
               {
                 "text": {
                   "regexp": {
-                    "pattern": ".*",
+                    "pattern": "command .*",
                     "flags": "i"
                   }
                 }
