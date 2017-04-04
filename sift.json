@@ -34,7 +34,7 @@
                 "text" : {
                   "regexp" : {
                     "flags" : "i",
-                    "pattern" : "match.*"
+                    "pattern" : "good.*"
                   }
                 }
               }
