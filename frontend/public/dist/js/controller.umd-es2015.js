@@ -117,7 +117,7 @@
 	      }).then(function (values) {
 	        console.log('botfwk-sift: getToken returned:', values);
 	        return {
-	          token: values[0] || ""
+	          token: values[0].value || ""
 	        };
 	      });
 	    }
