@@ -13,6 +13,9 @@ export default class MyView extends SiftView {
   // for more info: http://docs.redsift.com/docs/client-code-siftview
   presentView(value) {
     console.log('botfwk-sift: presentView: ', value);
+    Object.keys(value.data).forEach((k) => {
+      document.getElementById(k).textContent = value.data[k];
+    });
   };
 
   willPresentView(value) {

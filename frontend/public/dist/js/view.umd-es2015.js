@@ -80,6 +80,9 @@
 	    key: 'presentView',
 	    value: function presentView(value) {
 	      console.log('botfwk-sift: presentView: ', value);
+	      Object.keys(value.data).forEach(function (k) {
+	        document.getElementById(k).textContent = value.data[k];
+	      });
 	    }
 	  }, {
 	    key: 'willPresentView',

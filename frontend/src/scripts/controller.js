@@ -24,7 +24,7 @@ export default class MyController extends SiftController {
       case 'summary':
         return {
           html: 'summary.html',
-          data: {} //this.getX()
+          data: this.getToken()
         };
       default:
         console.error('botfwk-sift: unknown Sift type: ', state.type);
@@ -40,14 +40,17 @@ export default class MyController extends SiftController {
   //   });
   // }
 
-  //  getX() {
-  //   return this.storage.getAll({
-  //     bucket: 'x'
-  //   }).then((values) => {
-  //     console.log('botfwk-sift: getX returned:', values);
-  //     return {};
-  //   });
-  // }
+   getToken() {
+    return this.storage.getAll({
+      bucket: '_redsift',
+      keys: ['botfwk/handshake_token']
+    }).then((values) => {
+      console.log('botfwk-sift: getToken returned:', values);
+      return {
+        token: values[0] || ""
+      };
+    });
+  }
 
 }
 
