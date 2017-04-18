@@ -15,35 +15,6 @@ var connector = new builder.ChatConnector({
 
 var bot = new builder.UniversalBot(connector);
 
-// Helper methods
-
-var toAddress = {
-    'id': 'id',
-    'channelId': 'channelId',
-    'from': 'user',
-    'conversation': 'conversation',
-    'recipient': 'bot',
-    'serviceUrl': 'serviceUrl',
-    'useAuth': 'useAuth'
-}
-
-// From Microsoft SDK
-// https://github.com/Microsoft/BotBuilder/blob/master/Node/core/src/utils.ts#L76
-function moveFieldsTo(frm, to, fields) {
-    if (frm && to) {
-        for (var f in fields) {
-            if (frm.hasOwnProperty(f)) {
-                if (typeof to[f] === 'function') {
-                    to[fields[f]](frm[f]);
-                } else {
-                    to[fields[f]] = frm[f];
-                }
-                delete frm[f];
-            }
-        }
-    }
-}
-
 // Exported methods
 
 function reply(msg, text) {
@@ -62,16 +33,18 @@ function reply(msg, text) {
             }
             resolve();
         })
-    }).then(new Promise(function (resolve, reject) {
-        msg.text = text;
-        connector.send([msg], function (err) {
-            if (err) {
-                reject(err);
-                return;
-            }
-            resolve();
-        });
-    }))
+    }).then(function () {
+        return new Promise(function (resolve, reject) {
+            msg.text = text;
+            connector.send([msg], function (err) {
+                if (err) {
+                    reject(err);
+                    return;
+                }
+                resolve();
+            });
+        })
+    })
 }
 
 module.exports = {

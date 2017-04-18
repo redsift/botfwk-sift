@@ -3,7 +3,6 @@
  */
 'use strict';
 
-var builder = require('botbuilder');
 var botfwk = require('./botfwk.js');
 
 // Entry point for DAG node
