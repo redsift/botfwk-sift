@@ -41,7 +41,7 @@ export default class MyController extends SiftController {
   // }
 
    getToken() {
-    return this.storage.getAll({
+    return this.storage.get({
       bucket: '_redsift',
       keys: ['botfwk/handshake_token']
     }).then((values) => {

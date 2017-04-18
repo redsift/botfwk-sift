@@ -11,10 +11,6 @@ var mainJS = [
   {
     name: 'controller',
     indexFile: './src/scripts/controller.js'
-  },
-  {
-    name: 'email-client-controller',
-    indexFile: './src/scripts/email-client-controller.js'
   }
 ];
 

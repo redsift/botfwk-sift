@@ -3,6 +3,9 @@
  */
 'use strict';
 
+var builder = require('botbuilder');
+var botfwk = require('./botfwk.js');
+
 // Entry point for DAG node
 // got ={
 //   in: ... // contains the key/value pairs that match the given query
@@ -14,17 +17,22 @@
 // http://docs.redsift.com/docs/server-code-implementation
 module.exports = function (got) {
   const inData = got.in;
+  var promises = [];
 
-  console.log('botfwk-sift: node1.js: data received:', inData.data);
 
-  const json = inData.data.map(d => JSON.parse(d.value));
-  json.forEach(function(value, i){
-    console.log('datum#', i, 'value:', value)
-  })
+  for (var d of inData.data) {
+    if (d.value) {
+      try {
+        // parse raw message
+        var msg = JSON.parse(d.value);
+        promises.push(botfwk.reply(msg, 'Hello, ' + msg.from.name + '! You wrote ' + msg.text));
+      } catch (ex) {
+        console.error('bot.js: Error parsing value for: ', d.key);
+        console.error('bot.js: Exception: ', ex);
+        continue;
+      }
+    }
+  }
 
-  return [{
-    name: 'output1',
-    key: 'dataLength',
-    value: json.length
-  }];
+  return promises;
 };
