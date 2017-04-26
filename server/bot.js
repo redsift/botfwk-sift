@@ -37,10 +37,10 @@ module.exports = function (got) {
       try {
         // parse raw message
         var msg = JSON.parse(d.value);
+        console.log("message:",msg);
         // extract address in format expected by by Bot Framework SDK
         var addr = botfwk.address(msg);
         var text = 'Hello, ' + msg.from.name + '! You wrote ' + msg.text;
-
         promises.push(
           new Promise(function (resolve, reject) {
             var reply = new builder.Message()
